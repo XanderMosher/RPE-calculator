@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+int main() {
+  double oneRepMax = 0;
+  int userRPE = 0;
+  int userRepRange;
+  double userRecommendedLoad;
+  double userRecommendedLoadKG;
+  
+  cout << "What is your current 1RM? (in lbs)" << endl;
+  cin >> oneRepMax;
+  
+  cout << "What is your desired RPE?" << endl; 
+  cin >> userRPE;
+  while (userRPE < 5 || userRPE > 10) {
+    cout << "Please enter a number between 5 and 10" << endl;
+    cin  >> userRPE;
+  }
+
+  cout << "How many reps are you doing?" << endl;
+  cin >> userRepRange;
+  while (userRepRange < 1 || userRepRange > 10) {
+    cout << "Please enter a number between 4 and 10" << endl;
+    cin  >> userRepRange;
+  }
+  
+  double array[6][10] = {
+                     {1.05, .95, .92, .89, .87, .84, .82, .79, .76, .73}, //10
+                      {.95, .92, .89, .87, .84, .82, .79, .76, .73, .70}, //9
+                      {.92, .89, .87, .84, .82, .79, .76, .73, .70, .67}, //8
+                      {.89, .87, .84, .82, .79, .76, .73, .70, .67, .64}, //7
+                      {.87, .84, .82, .79, .76, .73, .70, .67, .64, .61}, //6
+                      {.84, .82, .79, .76, .73, .70, .67, .64, .61, .60}, //5
+  }; 
+ 
+
+  int row;
+  if (userRPE == 5){
+    row = 5;
+  }
+  else {
+    row = userRPE - 5;
+  }
+
+  int column = userRepRange - 1;
+
+  userRecommendedLoad = array[row][column] * oneRepMax;
+  userRecommendedLoadKG = userRecommendedLoad / 2.2046;
+  cout << "Recommended Load: " << setprecision(3) << userRecommendedLoad; 
+  cout << "lbs / " << setprecision(4) << userRecommendedLoadKG << "kg" <<  endl;
+
+}
+  
